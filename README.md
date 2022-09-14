@@ -50,14 +50,17 @@ setup({
 See [here for available options](https://github.com/empreinte-digitale/explicit/blob/main/src/setup.ts#L3)
 and [here for defaults](https://github.com/empreinte-digitale/explicit/blob/main/src/setup.ts#L13).
 
-`setup()` returns two functions for you to control tooltips programmatically:
+`setup()` returns three functions for you to control tooltips programmatically:
 
 ```js
-const {show, hide} = setup();
+const {show, hide, destroy} = setup();
 
 // shows a tooltip on the given element
 show(document.querySelector('[title]'))
 
 // hides any open tooltip
 hide();
+
+// remove all `explicit` related event listeners and DOM elements
+destroy();
 ```

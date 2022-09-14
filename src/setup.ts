@@ -105,30 +105,45 @@ export default (options: Partial<SetupOptions> = {}) => {
 		}
 	};
 
-	container.addEventListener('mouseover', ({target}) => {
+	const onMouseOver = ({target}) => {
 		handleFocusIn(target as HTMLElement);
-	});
+	}
 
-	container.addEventListener('mouseleave', () => {
+	const onMouseLeave = () => {
 		hide();
-	});
+	}
 
-	document.addEventListener('focusin', ({target}) => {
+	const onFocusIn = ({target}) => {
 		if (container.contains(target as HTMLElement)) {
 			handleFocusIn(target as HTMLElement);
 		} else {
 			hide();
 		}
-	});
+	}
 
-	document.addEventListener('keyup', ({key}) => {
+	const onKeyUp = ({key}) => {
 		if (key === 'Escape') {
 			hide();
 		}
-	});
+	}
+
+	const destroy = () => {
+		container.removeEventListener('mouseover', onMouseOver);
+		container.removeEventListener('mouseleave', onMouseLeave);
+		document.removeEventListener('focusin', onFocusIn);
+		document.removeEventListener('keyup', onKeyUp);
+		tooltip.remove();
+		tooltipContainer.remove();
+	}
+
+	container.addEventListener('mouseover', onMouseOver);
+	container.addEventListener('mouseleave', onMouseLeave);
+	document.addEventListener('focusin', onFocusIn);
+	document.addEventListener('keyup', onKeyUp);
 
 	return {
 		show,
-		hide
+		hide,
+		destroy
 	};
 };
