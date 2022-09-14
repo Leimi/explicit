@@ -38,9 +38,3 @@
 	font-size: 0.8rem;
 	pointer-events: all;
 }
-
-@media (hover: none) {
-	.explicit-Tooltip {
-		display: none;
-	}
-}

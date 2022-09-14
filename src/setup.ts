@@ -121,6 +121,12 @@ export default (options: Partial<SetupOptions> = {}) => {
 		}
 	});
 
+	document.addEventListener('focusout', ({target}) => {
+		if (container.contains(target as HTMLElement)) {
+			hide();
+		}
+	});
+
 	document.addEventListener('keyup', ({key}) => {
 		if (key === 'Escape') {
 			hide();
